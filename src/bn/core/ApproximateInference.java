@@ -13,9 +13,9 @@ public class ApproximateInference {
     }
 
     public Double rejectionSampling(BayesianNetwork.Node X, Assignment e, BayesianNetwork bn, int samples) {
-        int N=0;
+        double[] xCounts = new double[samples];
 
-        for (int i = 1; i<N;i++){
+        for (int i = 0; i < samples;i++){
             X = bn.priorSample();
 //            if (X.isConsistent(e)){
 //

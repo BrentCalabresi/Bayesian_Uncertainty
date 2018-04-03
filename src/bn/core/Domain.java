@@ -29,16 +29,16 @@ public class Domain extends ArrayList<Object> {
     }
 
     public Domain(Object... elements) {
-	this();
-	for (Object o : elements) {
-	    add(o);
-	}
+		this();
+		for (Object o : elements) {
+			add(o);
+		}
     }
 
     public Domain(Collection<Object> collection) {
-	this();
-	for (Object o : collection) {
-	    add(o);
-	}
+		this();
+		for (Object o : collection) {
+			add(o);
+		}
     }
 }

@@ -40,8 +40,8 @@ public class RandomVariable implements Printable {
 //    }
 
     public RandomVariable(String name, Domain domain) {
-	this.name = name;
-	this.domain = domain;
+        this.name = name;
+        this.domain = domain;
     }
 
     public RandomVariable(String name) {
@@ -81,9 +81,9 @@ public class RandomVariable implements Printable {
      * Print this RandomVariable to the given PrintStream.
      */
     public void print(PrintStream out) {
-	PrintWriter writer = new PrintWriter(out, true);
-	print(writer);
-	writer.flush();
+        PrintWriter writer = new PrintWriter(out, true);
+        print(writer);
+        writer.flush();
     }
 
     /**
@@ -97,11 +97,11 @@ public class RandomVariable implements Printable {
      * Return the string representation of this RandomVariable.
      */
     public String toString() {
-	StringWriter writer = new StringWriter();
-	PrintWriter out = new PrintWriter(writer);
-	print(out);
-	out.flush();
-	return writer.toString();
+        StringWriter writer = new StringWriter();
+        PrintWriter out = new PrintWriter(writer);
+        print(out);
+        out.flush();
+        return writer.toString();
     }
 
 }
