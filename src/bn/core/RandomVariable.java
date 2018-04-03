@@ -20,24 +20,24 @@ import bn.core.BayesianNetwork.Node;
  */
 public class RandomVariable implements Printable {
 
-    public double posteriorForParents(RandomVariable rv, BayesianNetwork bn) {
-        Node n = (Node) bn.nodes.get(rv);
-
-//        if (!(n instanceof Node)) {
-//            throw new IllegalArgumentException(
-//                    "Enumeration-Ask only works with finite Nodes.");
+//    public double posteriorForParents(RandomVariable rv, BayesianNetwork bn) {
+//        Node n = (Node) bn.nodes.get(rv);
+//
+////        if (!(n instanceof Node)) {
+////            throw new IllegalArgumentException(
+////                    "Enumeration-Ask only works with finite Nodes.");
+////        }
+//        BayesianNetwork.Node fn =  n;
+//        Assignment[] vals = new Assignment[1 + fn.parents.size()];
+//        int idx = 0;
+//        for (Node pn : n.parents) {
+//            vals[idx] = extendedValues[varIdxs.get(pn.getRandomVariable())];
+//            idx++;
 //        }
-        BayesianNetwork.Node fn =  n;
-        Assignment[] vals = new Assignment[1 + fn.parents.size()];
-        int idx = 0;
-        for (Node pn : n.parents) {
-            vals[idx] = extendedValues[varIdxs.get(pn.getRandomVariable())];
-            idx++;
-        }
-        vals[idx] = extendedValues[varIdxs.get(rv)];
-
-        return fn.cpt.get(vals[idx]);
-    }
+//        vals[idx] = extendedValues[varIdxs.get(rv)];
+//
+//        return fn.cpt.get(vals[idx]);
+//    }
 
     public RandomVariable(String name, Domain domain) {
 	this.name = name;

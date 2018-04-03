@@ -115,6 +115,16 @@ public class BayesianNetwork {
     public BayesianNetwork() {
     }
 
+    //FIXME
+    public Node priorSample(){
+    	Node x = null;
+
+    	for (Node n: this.nodes){
+
+		}
+		return x;
+	}
+
     /**
      * The Set of Nodes representing this BayesianNetwork.
      */

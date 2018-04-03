@@ -12,30 +12,25 @@ public class ApproximateInference {
 
     }
 
-    public Distribution rejectionSampling(RandomVariable[] X, Domain e, BayesianNetwork bn, int samples) {
+    public Double rejectionSampling(BayesianNetwork.Node X, Assignment e, BayesianNetwork bn, int samples) {
+        int N=0;
 
-        ArrayList<Double> localN = new ArrayList<>();
-
-        for (int j = 0; j < samples; j++) {
-            Map<RandomVariable, Object> x = //prior sample of bn;
-            // if <b>x</b> is consistent with e then
-            if (isConsistent(X, e)) {
-                // <b>N</b>[x] <- <b>N</b>[x] + 1
-                // where x is the value of X in <b>x</b>
-                N[ProbUtil.indexOf(X, x)] += 1.0;
-            }
+        for (int i = 1; i<N;i++){
+            X = bn.priorSample();
+//            if (X.isConsistent(e)){
+//
+//            }
         }
-        // return NORMALIZE(<b>N</b>)
-        return new CPT(N, X).normalize();
+        return -1.0;
     }
 
-    private boolean isConsistent(Map<RandomVariable, Object> x,
+    private boolean isConsistent(Assignment x,
 			Assignment[] e) {
 
         		for (Assignment ap : e) {
-            		if (!ap.getValue().equals(x.get(ap.getTermVariable()))) {
-               				return false;
-               			}
+//            		if (!ap.getValue().equals(x.get(ap.getTermVariable()))) {
+//               				return false;
+//               			}
             		}
         		return true;
         	}

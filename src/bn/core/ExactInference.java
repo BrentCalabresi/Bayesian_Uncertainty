@@ -1,11 +1,39 @@
 package bn.core;
 
+import bn.parser.XMLBIFParser;
 import bn.util.ArraySet;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 /**
  * @author BAC on 3/30/2018.
  */
 public class ExactInference {
+    String file;
+
+    public ExactInference(String file){
+        this.file = file;
+    }
+
+    public static void main(String[] args) {
+        BayesianNetwork network = null;
+
+        try {
+             network = new XMLBIFParser().readNetworkFromFile(args[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        // ---- network is read and stored ----
+
+        System.out.println(network.nodes);
+    }
 
         public Distribution enumerationAsk(ArraySet<RandomVariable> X, RandomVariable observedEvidence, BayesianNetwork bn) {
             Distribution Q = new Distribution(X.size());
@@ -23,11 +51,12 @@ public class ExactInference {
             if (vars.isEmpty())
                 return 1;
 
-            ArraySet<RandomVariable> Y = vars;
+            RandomVariable Y = (RandomVariable) vars.toArray()[0];
 
-            if (Y.contains(e)){
-                return
-                }
+//            if (){
+//                return 1.0;
+//                }
+            return -1.0;
             }
 
 //    protected double enumerateAll(ArraySet<RandomVariable> vars, RandomVariable e) {
