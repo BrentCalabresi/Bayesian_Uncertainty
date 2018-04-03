@@ -9,6 +9,7 @@ package bn.core;
 
 import bn.util.ArraySet;
 import bn.util.Printable;
+import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -107,6 +108,32 @@ public class BayesianNetwork {
 			return writer.toString();
 		}
 
+		public Object randomSampleGivenParents(Assignment parentAssignment) {
+
+			Domain rvDomain = variable.getDomain();
+
+//			Assignment parentAssignment = new Assignment();
+//			for (Node parentNode : this.parents) {
+//
+//			}
+
+			ArrayList<Double> conditionalDist = new ArrayList<>();
+
+			for (Object possibleVal : rvDomain) {
+				Assignment assignedValAssignment = parentAssignment.copy();
+				assignedValAssignment.set(this.variable, possibleVal);
+				conditionalDist.add(this.cpt.get(assignedValAssignment));
+			}
+
+			double randomVal = Math.random();
+			double sum = 0;
+			for (int i = 0; i < conditionalDist.size(); i++) {
+				sum += conditionalDist.get(i);
+				if (sum >= randomVal) return rvDomain.get(i);
+			}
+			return null;
+		}
+
     }
 
     /**
@@ -123,12 +150,13 @@ public class BayesianNetwork {
 		Assignment event = new Assignment();
 
     	// loops through variables in this bayes net
-    	for (Node n: this.nodes){
-
-    		// x[i] <- random sample from P(X_i | parents(X_i))
-
-
-		}
+//    	for (Node n: this.nodes){
+//
+//    		// x[i] <- random sample from P(X_i | parents(X_i))
+//			n.cpt.get
+//
+//
+//		}
 		return x;
 	}
 
@@ -308,21 +336,22 @@ public class BayesianNetwork {
      * way that brings out the hierarchy. Or not.
      */
     public void print(PrintWriter out) {
-	for (Node node : nodes) {
-	    node.variable.print(out);
-	    out.print(" <- ");
-	    if (node.parents != null) {
-		for (Node pnode : node.parents) {
-		    pnode.variable.print(out);
-		    out.print(" ");
+		for (Node node : nodes) {
+			node.variable.print(out);
+			out.print(" <- ");
+			if (node.parents != null) {
+				for (Node pnode : node.parents) {
+					pnode.variable.print(out);
+					out.print(" ");
+				}
+			}
+
+			out.println();
+			if (node.cpt != null) {
+				// Might not want this if it clutters things up...
+				node.cpt.print(out);
+			}
 		}
-	    }
-	    out.println();
-	    if (node.cpt != null) {
-		// Might not want this if it clutters things up...
-		node.cpt.print(out);
-	    }
-	}
     }
 
     /**
@@ -363,11 +392,11 @@ public class BayesianNetwork {
      */
     public static void main(String[] argv) {
 		RandomVariable A = new RandomVariable("A");
-		A.setDomain(new Domain("a1", "a2", "a3"));
+		A.setDomain(new Domain("a1", "a2"));
 		RandomVariable B = new RandomVariable("B");
 		B.setDomain(new Domain("b1", "b2"));
 		RandomVariable C = new RandomVariable("C");
-		C.setDomain(new Domain("c1", "c2", "c3", "c4"));
+		C.setDomain(new Domain("c1", "c2"));
 		List<RandomVariable> givens = new ArrayList<RandomVariable>(2);
 		givens.add(B);
 		givens.add(C);
@@ -378,5 +407,31 @@ public class BayesianNetwork {
 		network.add(C);
 		network.connect(A, givens, cpt);
 		network.print(System.out);
+
+
+		Assignment parentAssignment = new Assignment();
+		parentAssignment.set(B, B.domain.get(0));
+		parentAssignment.set(C, C.domain.get(1));
+
+		Assignment a1ass = parentAssignment.copy();
+		a1ass.set(A, A.domain.get(0));
+		Assignment a2ass = parentAssignment.copy();
+		a2ass.set(A, A.domain.get(1));
+
+		Node ANode = network.getNodeForVariable(A);
+		ANode.cpt.set(a1ass, 0.2);
+		ANode.cpt.set(a2ass, 0.8);
+
+		int a1counter = 0;
+		int a2counter = 0;
+
+		for (int i = 0; i < 100; i++) {
+			Object randomAss = ANode.randomSampleGivenParents(parentAssignment);
+			System.out.println(randomAss);
+			if ((String)randomAss == "a1") a1counter++;
+			else a2counter++;
+		}
+
+		System.out.println("a1 percentage: " + (double)a1counter / (a1counter+a2counter));
     }
 }

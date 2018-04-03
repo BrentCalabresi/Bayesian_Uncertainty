@@ -41,7 +41,7 @@ public class CPT {
      * Parent class of entries in a CPT.
      */
     abstract public class Entry {
-	abstract public void print(PrintWriter out, String prefix);
+		abstract public void print(PrintWriter out, String prefix);
     }
 
     /**
@@ -49,22 +49,23 @@ public class CPT {
      * contains a set of Entries, one for each value of the variable.
      */
     public class Dimension extends Entry {
-	public RandomVariable variable;
-	public Map<Object,Entry> entries;
-	public Dimension(RandomVariable variable) {
-	    this.variable = variable;
-	    Domain domain = variable.getDomain();
-	    this.entries = new LinkedHashMap<Object,Entry>(domain.size());
-	}
-	/**
-	 * Print this CPT Dimension to the given PrintWriter.
-	 */
-	public void print(PrintWriter out, String prefix) {
-	    for (Map.Entry<Object,Entry> entry : entries.entrySet()) {
-		String newprefix = prefix + variable.getName() + "=" + entry.getKey() + "\t";
-		entry.getValue().print(out, newprefix);
-	    }
-	}
+		public RandomVariable variable;
+		public Map<Object,Entry> entries;
+
+		public Dimension(RandomVariable variable) {
+			this.variable = variable;
+			Domain domain = variable.getDomain();
+			this.entries = new LinkedHashMap<Object,Entry>(domain.size());
+		}
+		/**
+		 * Print this CPT Dimension to the given PrintWriter.
+		 */
+		public void print(PrintWriter out, String prefix) {
+			for (Map.Entry<Object,Entry> entry : entries.entrySet()) {
+			String newprefix = prefix + variable.getName() + "=" + entry.getKey() + "\t";
+			entry.getValue().print(out, newprefix);
+			}
+		}
 	
     }
 
@@ -74,17 +75,17 @@ public class CPT {
      * Entry.
      */
     public class ProbabilityValue extends Entry {
-	public double value;
-	public ProbabilityValue(double value) {
-	    this.value = value;
-	}
-	/**
-	 * Print this CPT ProbabilityValue to the given PrintWriter.
-	 */
-	public void print(PrintWriter out, String prefix) {
-	    out.print(prefix);
-	    out.println(value);
-	}
+		public double value;
+		public ProbabilityValue(double value) {
+			this.value = value;
+		}
+		/**
+		 * Print this CPT ProbabilityValue to the given PrintWriter.
+		 */
+		public void print(PrintWriter out, String prefix) {
+			out.print(prefix);
+			out.println(value);
+		}
     }
 
     /**
@@ -112,24 +113,24 @@ public class CPT {
      * comment for the CPT class.
      */
     protected Entry init(RandomVariable query, List<RandomVariable> givens, int index) {
-	if (index < givens.size()) {
-	    // Add a Dimension for the current given variable
-	    RandomVariable given = givens.get(index);
-	    Dimension dimen = new Dimension(given);
-	    for (Object value : given.getDomain()) {
-		Entry entry = init(query, givens, index+1);
-		dimen.entries.put(value, entry);
-	    }
-	    return dimen;
-	} else {
-	    // Done givens; add ProbabilityValues for the query var's values
-	    Dimension dimen = new Dimension(query);
-	    for (Object value : query.getDomain()) {
-		ProbabilityValue p = new ProbabilityValue(0.0);
-		dimen.entries.put(value, p);
-	    }
-	    return dimen;
-	}
+		if (index < givens.size()) {
+			// Add a Dimension for the current given variable
+			RandomVariable given = givens.get(index);
+			Dimension dimen = new Dimension(given);
+			for (Object value : given.getDomain()) {
+				Entry entry = init(query, givens, index+1);
+				dimen.entries.put(value, entry);
+			}
+			return dimen;
+		} else {
+			// Done givens; add ProbabilityValues for the query var's values
+			Dimension dimen = new Dimension(query);
+			for (Object value : query.getDomain()) {
+				ProbabilityValue p = new ProbabilityValue(0.0);
+				dimen.entries.put(value, p);
+			}
+			return dimen;
+		}
     }
 
     /**
@@ -138,25 +139,26 @@ public class CPT {
      * @throws NoSuchElementException if the values don't represent a path to a Entry.
      */
     protected ProbabilityValue find(Entry entry, Assignment assignment) throws NoSuchElementException {
-	if (entry == null) {
-	    throw new NoSuchElementException();
-	} else if (entry instanceof ProbabilityValue) {
-	    return (ProbabilityValue)entry;
-	} else {
-	    Dimension dimen = (Dimension)entry;
-	    RandomVariable var = dimen.variable;
-	    Object value = assignment.get(var);
-	    if (value == null) {
-		throw new NoSuchElementException();
-	    } else {
-		entry = dimen.entries.get(value);
 		if (entry == null) {
-		    throw new NoSuchElementException();
+			throw new NoSuchElementException();
+		} else if (entry instanceof ProbabilityValue) {
+			return (ProbabilityValue)entry;
 		} else {
-		    return find(entry, assignment);
+			Dimension dimen = (Dimension)entry;
+			RandomVariable var = dimen.variable;
+			Object value = assignment.get(var);
+
+			if (value == null) {
+				throw new NoSuchElementException();
+			} else {
+				entry = dimen.entries.get(value);
+				if (entry == null) {
+					throw new NoSuchElementException();
+				} else {
+					return find(entry, assignment);
+				}
+			}
 		}
-	    }
-	}
     }
 
     /**
@@ -165,12 +167,12 @@ public class CPT {
      * @throws NoSuchElementException if the values don't represent a path to a ProbabilityValue.
      */
     public void set(Assignment e, double p) {
-	ProbabilityValue pv = find(root, e);
-	if (pv != null) {
-	    pv.value = p;
-	} else {
-	    throw new NoSuchElementException();
-	}
+		ProbabilityValue pv = find(root, e);
+		if (pv != null) {
+			pv.value = p;
+		} else {
+			throw new NoSuchElementException();
+		}
     }
 
     /**
@@ -179,12 +181,12 @@ public class CPT {
      * @throws NoSuchElementException if the values don't represent a path to a ProbabilityValue.
      */
     public double get(Assignment e) throws NoSuchElementException {
-	ProbabilityValue pv = find(root, e);
-	if (pv != null) {
-	    return pv.value;
-	} else {
-	    throw new NoSuchElementException();
-	}
+		ProbabilityValue pv = find(root, e);
+		if (pv != null) {
+			return pv.value;
+		} else {
+			throw new NoSuchElementException();
+		}
     }
 
     /**
@@ -210,29 +212,29 @@ A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3    A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3
      * inside a {@code definition} element.
      */
     public Iterator<ProbabilityValue> valueIterator() {
-	final Stack<Entry> stack = new Stack<Entry>();
-	stack.push(root);
-	return new Iterator<ProbabilityValue>() {
-	    public boolean hasNext() {
-		return !stack.isEmpty();
-	    }
-	    public ProbabilityValue next() throws NoSuchElementException {
-		while (true) {
-		    Entry entry = stack.pop();
-		    if (entry instanceof ProbabilityValue) {
-			return (ProbabilityValue)entry;
-		    } else {
-			Dimension dimen = (Dimension)entry;
-			Collection<Entry> entries = dimen.entries.values();
-			// Push in reverse order (to preserve DFS ordering)
-			reversePush(stack, entries.iterator());
-		    }
-		}
-	    }
-	    public void remove() {
-		throw new UnsupportedOperationException();
-	    }
-	};
+		final Stack<Entry> stack = new Stack<Entry>();
+		stack.push(root);
+		return new Iterator<ProbabilityValue>() {
+			public boolean hasNext() {
+			return !stack.isEmpty();
+			}
+			public ProbabilityValue next() throws NoSuchElementException {
+			while (true) {
+				Entry entry = stack.pop();
+				if (entry instanceof ProbabilityValue) {
+				return (ProbabilityValue)entry;
+				} else {
+				Dimension dimen = (Dimension)entry;
+				Collection<Entry> entries = dimen.entries.values();
+				// Push in reverse order (to preserve DFS ordering)
+				reversePush(stack, entries.iterator());
+				}
+			}
+			}
+			public void remove() {
+			throw new UnsupportedOperationException();
+			}
+		};
     }
 
     /**
@@ -242,11 +244,11 @@ A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3    A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3
      * unwinds. How Lispilicious!
      */
     protected void reversePush(Stack<Entry> stack, Iterator<Entry> elements) {
-	if (elements.hasNext()) {
-	    Entry element = elements.next();
-	    reversePush(stack, elements);
-	    stack.push(element);
-	}
+		if (elements.hasNext()) {
+			Entry element = elements.next();
+			reversePush(stack, elements);
+			stack.push(element);
+		}
     }
 
     // Printable
@@ -262,9 +264,9 @@ A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3    A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3
      * Print this CPT to the given PrintStream.
      */
     public void print(PrintStream out) {
-	PrintWriter writer = new PrintWriter(out, true);
-	print(writer);
-	writer.flush();
+		PrintWriter writer = new PrintWriter(out, true);
+		print(writer);
+		writer.flush();
     }
 
     /**
@@ -278,11 +280,11 @@ A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3    A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3
      * Return the string representation of this CPT.
      */
     public String toString() {
-	StringWriter writer = new StringWriter();
-	PrintWriter out = new PrintWriter(writer);
-	print(out);
-	out.flush();
-	return writer.toString();
+		StringWriter writer = new StringWriter();
+		PrintWriter out = new PrintWriter(writer);
+		print(out);
+		out.flush();
+		return writer.toString();
     }
 
     // Testing
@@ -294,35 +296,35 @@ A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3    A1 A2 A3  A1 A2 A3  A1 A2 A3  A1 A2 A3
     /**
      * Test driver for CPT.
      */
-    public static void main(String[] argv) {
-	RandomVariable A = new RandomVariable("A");
-	A.setDomain(new Domain("a1", "a2", "a3"));
-	RandomVariable B = new RandomVariable("B");
-	B.setDomain(new Domain("b1", "b2"));
-	RandomVariable C = new RandomVariable("C");
-	C.setDomain(new Domain("c1", "c2", "c3", "c4"));
-	List<RandomVariable> givens = new ArrayList<RandomVariable>(2);
-	givens.add(B);
-	givens.add(C);
-	CPT cpt = new CPT(A, givens);
-	cpt.print(System.out);
+	public static void main(String[] argv) {
+		RandomVariable A = new RandomVariable("A");
+		A.setDomain(new Domain("a1", "a2", "a3"));
+		RandomVariable B = new RandomVariable("B");
+		B.setDomain(new Domain("b1", "b2"));
+		RandomVariable C = new RandomVariable("C");
+		C.setDomain(new Domain("c1", "c2", "c3", "c4"));
+		List<RandomVariable> givens = new ArrayList<RandomVariable>(2);
+		givens.add(B);
+		givens.add(C);
+		CPT cpt = new CPT(A, givens);
+		cpt.print(System.out);
 
-	Assignment e = new Assignment();
-	e.put(A, "a2");
-	e.put(B, "b2");
-	e.put(C, "c2");
-	cpt.set(e, 0.5);
-	cpt.print(System.out);
+		Assignment e = new Assignment();
+		e.put(A, "a2");
+		e.put(B, "b2");
+		e.put(C, "c2");
+		cpt.set(e, 0.5);
+		cpt.print(System.out);
 
-	System.out.println("expecting 0.5: " + cpt.get(e));
+		System.out.println("expecting 0.5: " + cpt.get(e));
 
-	try {
-	    e.put(C, "b2");
-	    cpt.set(e, 0.5);
-	    cpt.print(System.out);
-	    System.out.println("expected NoSuchElementException!");
-	} catch (NoSuchElementException ex) {
-	    System.out.println("expected NoSuchElementException: " + ex);
-	}
+		try {
+			e.put(C, "b2");
+			cpt.set(e, 0.5);
+			cpt.print(System.out);
+			System.out.println("expected NoSuchElementException!");
+		} catch (NoSuchElementException ex) {
+			System.out.println("expected NoSuchElementException: " + ex);
+		}
     }
 }
