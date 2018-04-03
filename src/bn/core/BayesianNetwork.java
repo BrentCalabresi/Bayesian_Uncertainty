@@ -7,11 +7,16 @@
 
 package bn.core;
 
-import java.io.*;
-import java.util.*;
-
 import bn.util.ArraySet;
 import bn.util.Printable;
+
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * A BayesianNetwork is a network of nodes, each of which corresponds
@@ -113,7 +118,7 @@ public class BayesianNetwork {
     /**
      * The Set of Nodes representing this BayesianNetwork.
      */
-    protected Set<Node> nodes = new ArraySet<Node>();
+    protected ArraySet<Node> nodes = new ArraySet<>();
 
     /**
      * Add a node for the given RandomVariable to this BayesianNetwork.

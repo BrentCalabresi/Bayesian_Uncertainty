@@ -65,6 +65,14 @@ public class ArraySet<E> extends AbstractSet<E> {
 	return elements.size();
     }
 
+    public Object get(Object element){
+        for (Object e : elements){
+            if (element.equals(e))
+                return e;
+        }
+        return null;
+    }
+
     /**
      * Adds the specified element to this ArraySet if it is not already present.
      * Returns true if the element was added, else false.
