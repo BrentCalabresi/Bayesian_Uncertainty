@@ -204,7 +204,7 @@ public class BayesianNetwork {
      * file.
      */
     public void add(RandomVariable var) {
-	nodes.add(new Node(var));
+		nodes.add(new Node(var));
     }
 
     /**
@@ -238,7 +238,7 @@ public class BayesianNetwork {
     }
 
     /**
-     * Return the RandomVariable with the given name from this BayesianNewtork.
+     * Return the RandomVariable with the given name from this BayesianNetwork.
      * @throws NoSuchElementException
      * <p>
      * This is currently only used when reading a network from an XMLBIF
@@ -246,13 +246,15 @@ public class BayesianNetwork {
      * the variables more efficiently.
      */
     public RandomVariable getVariableByName(String name) {
-	for (Node node : nodes) {
-	    RandomVariable var = node.variable;
-	    if (var.getName().equals(name)) {
-		return var;
-	    }
-	}
-	throw new NoSuchElementException();
+
+    	for (Node node : nodes) {
+			RandomVariable var = node.variable;
+			if (var.getName().equals(name)) {
+
+				return var;
+			}
+		}
+		throw new NoSuchElementException();
     }
 
     /**
@@ -260,7 +262,7 @@ public class BayesianNetwork {
      * this BayesianNetwork.
      */
     public int size() {
-	return nodes.size();
+		return nodes.size();
     }
 
     /**
@@ -350,14 +352,14 @@ public class BayesianNetwork {
      * use in a certain kind of sampling...
      */
     public Set<RandomVariable> getChildren(RandomVariable X) {
-	trace("BayesinNetwork.getChildren: X=" + X);
-	ArraySet<RandomVariable> children = new ArraySet<RandomVariable>();
-	Node node = getNodeForVariable(X);
-	for (Node childNode: node.children) {
-	    children.add(childNode.variable);
-	    trace("BayesinNetwork.getChildren: " + childNode.variable);
-	}
-	return children;
+		trace("BayesinNetwork.getChildren: X=" + X);
+		ArraySet<RandomVariable> children = new ArraySet<RandomVariable>();
+		Node node = getNodeForVariable(X);
+		for (Node childNode: node.children) {
+			children.add(childNode.variable);
+			trace("BayesinNetwork.getChildren: " + childNode.variable);
+		}
+		return children;
     }
 	
     // Printable
@@ -400,7 +402,7 @@ public class BayesianNetwork {
      * Print this BayesianNetwork to System.out.
      */
     public void print() {
-	print(System.out);
+		print(System.out);
     }
 
     /**
@@ -420,10 +422,7 @@ public class BayesianNetwork {
 	//System.err.println(msg);
     }
 
-    /**
-     * Test driver for BayesianNetwork.
-     */
-    public static void main(String[] argv) {
+    public void createDefault() {
 		RandomVariable A = new RandomVariable("A");
 		A.setDomain(new Domain("a1", "a2"));
 		RandomVariable B = new RandomVariable("B");
@@ -434,16 +433,15 @@ public class BayesianNetwork {
 		givens.add(B);
 		givens.add(C);
 		CPT cpt = new CPT(A, givens);
-		BayesianNetwork network = new BayesianNetwork();
-		network.add(A);
-		network.add(B);
-		network.add(C);
-		network.connect(A, givens, cpt);
+		this.add(A);
+		this.add(B);
+		this.add(C);
+		this.connect(A, givens, cpt);
 		//network.print(System.out);
 
-		System.out.println("nodes: " + network.nodes);
+		System.out.println("nodes: " + this.nodes);
 
-		Node ANode = network.getNodeForVariable(A);
+		Node ANode = this.getNodeForVariable(A);
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
 				double a1p = Math.random();
@@ -464,34 +462,42 @@ public class BayesianNetwork {
 		b1ass.set(B, B.domain.get(0));
 		Assignment b2ass = new Assignment();
 		b2ass.set(B, B.domain.get(1));
-		network.getNodeForVariable(B).cpt = new CPT(B, new ArrayList<RandomVariable>());
+		this.getNodeForVariable(B).cpt = new CPT(B, new ArrayList<>());
 		double b1assp = Math.random();
-		network.getNodeForVariable(B).cpt.set(b1ass, b1assp);
-		network.getNodeForVariable(B).cpt.set(b2ass, 1-b1assp);
+		this.getNodeForVariable(B).cpt.set(b1ass, b1assp);
+		this.getNodeForVariable(B).cpt.set(b2ass, 1-b1assp);
 
 		Assignment c1ass = new Assignment();
 		c1ass.set(C, C.domain.get(0));
 		Assignment c2ass = new Assignment();
 		c2ass.set(C, C.domain.get(1));
-		network.getNodeForVariable(C).cpt = new CPT(C, new ArrayList<RandomVariable>());
+		this.getNodeForVariable(C).cpt = new CPT(C, new ArrayList<>());
 		double c1assp = Math.random();
-		network.getNodeForVariable(C).cpt.set(c1ass, c1assp);
-		network.getNodeForVariable(C).cpt.set(c2ass, 1-c1assp);
+		this.getNodeForVariable(C).cpt.set(c1ass, c1assp);
+		this.getNodeForVariable(C).cpt.set(c2ass, 1-c1assp);
+		System.out.println("nodes: " + this.nodes);
+	}
 
-		network.print(System.out);
+    /**
+     * Test driver for BayesianNetwork.
+     */
+    public static void main(String[] argv) {
 
-//		try {
-//			TimeUnit.SECONDS.sleep(1);
+
+//		network.print(System.out);
 //
-//		} catch (InterruptedException e) {
+////		try {
+////			TimeUnit.SECONDS.sleep(1);
+////
+////		} catch (InterruptedException e) {
+////
+////		}
 //
+//		ArrayList<Assignment> a = new ArrayList<>();
+//		for (int i = 0; i < 100; i++) {
+//			a.add(network.priorSample());
 //		}
-
-		ArrayList<Assignment> a = new ArrayList<>();
-		for (int i = 0; i < 100; i++) {
-			a.add(network.priorSample());
-		}
-		System.out.println(a);
+//		System.out.println(a);
 
 
 //		Assignment parentAssignment = new Assignment();
