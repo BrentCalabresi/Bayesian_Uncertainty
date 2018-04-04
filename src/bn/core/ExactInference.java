@@ -1,10 +1,8 @@
 package bn.core;
 
-import bn.parser.XMLBIFParser;
-import bn.util.ArraySet;
-import com.sun.org.glassfish.gmbal.ParameterNames;
-import org.xml.sax.SAXException;
 import bn.core.BayesianNetwork.Node;
+import bn.parser.XMLBIFParser;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -22,8 +20,7 @@ public class ExactInference {
     }
 
     public static void main(String[] args) {
-        network = null;
-
+        System.out.println(args[0]);
         try {
              network = new XMLBIFParser().readNetworkFromFile(args[0]);
         } catch (IOException e) {
@@ -35,8 +32,10 @@ public class ExactInference {
         }
 
         // ---- network is read and stored ----
-
         ExactInference inference = new ExactInference(args[0]);
+        RandomVariable query = network.getVariableByName(args[1]);
+        System.out.println(query);
+
         Distribution d = inference.enumerationAsk(network.getNodeForVariable(network.getVariableByName(args[1])),null,network);
 
         System.out.println(d);
@@ -57,12 +56,11 @@ public class ExactInference {
 
 
         protected double enumerateAll(List<RandomVariable> vars, Assignment e) {
-
+            double sum = 0;
             if (vars.isEmpty())
                 return 1;
 
             RandomVariable Y = (RandomVariable) vars.toArray()[0];
-            Node nodeY = network.getNodeForVariable(Y);
 
             //Y is assigned a value in e
             if (e.containsValue(Y)){
@@ -70,8 +68,11 @@ public class ExactInference {
                 return network.getProb(Y,e) * enumerateAll(vars.subList(1,vars.size()),e);
             }
             else{
-                return network.getProb(Y,e) * enumerateAll(vars.subList(1,vars.size()),e);
-
+                for (Object o: Y.domain){
+                    e.set(Y,o);
+                    sum +=  network.getProb(((RandomVariable) e.get(o)),e) * enumerateAll(vars.subList(1,vars.size()),e);
+                }
+                return sum;
             }
 
         }
