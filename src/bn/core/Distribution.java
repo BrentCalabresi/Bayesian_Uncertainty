@@ -45,6 +45,10 @@ public class Distribution extends LinkedHashMap<Object,Double> {
 	this(X.getDomain().size());
     }
 
+    public Distribution(LinkedHashMap<Object,Integer> lhm) {
+        for (Object o : lhm.keySet()) this.put(o, lhm.get(o));
+    }
+
     /**
      * Store the given double as the value of the given RandomVariable in this
      * distribution.

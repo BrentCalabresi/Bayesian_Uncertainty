@@ -11,6 +11,7 @@ import bn.util.ArraySet;
 import bn.util.Printable;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.ValueException;
 
+import javax.sound.midi.SysexMessage;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A BayesianNetwork is a network of nodes, each of which corresponds
@@ -118,18 +120,26 @@ public class BayesianNetwork {
 //			}
 
 			ArrayList<Double> conditionalDist = new ArrayList<>();
+			//System.out.println("current rvDomain: " + rvDomain);
 
 			for (Object possibleVal : rvDomain) {
 				Assignment assignedValAssignment = parentAssignment.copy();
 				assignedValAssignment.set(this.variable, possibleVal);
+//				System.out.println("assignedValAssignment: " + assignedValAssignment);
+//				System.out.println("current node: " + this.variable);
 				conditionalDist.add(this.cpt.get(assignedValAssignment));
 			}
+			//System.out.println("conditionalDist: " + conditionalDist);
 
 			double randomVal = Math.random();
+			//System.out.println("randomVal: " + randomVal);
 			double sum = 0;
 			for (int i = 0; i < conditionalDist.size(); i++) {
 				sum += conditionalDist.get(i);
-				if (sum >= randomVal) return rvDomain.get(i);
+				if (sum >= randomVal) {
+					//System.out.println("returning " + rvDomain.get(i));
+					return rvDomain.get(i);
+				}
 			}
 			return null;
 		}
@@ -142,22 +152,45 @@ public class BayesianNetwork {
     public BayesianNetwork() {
     }
 
-    //FIXME
-    public Node priorSample(){
-    	Node x = null;
+
+    public Assignment priorSample() {
+    	//Node x = null;
 
     	// x = an event with n elements
 		Assignment event = new Assignment();
 
     	// loops through variables in this bayes net
-//    	for (Node n: this.nodes){
-//
-//    		// x[i] <- random sample from P(X_i | parents(X_i))
-//			n.cpt.get
-//
-//
-//		}
-		return x;
+    	for (RandomVariable r : this.getVariableListTopologicallySorted()) {
+
+
+    		Node n = this.getNodeForVariable(r);
+    		// x[i] <- random sample from P(X_i | parents(X_i))
+			List<Node> nodeParents = n.parents;
+			Assignment parentAssignments = new Assignment();
+
+			if (nodeParents == null) {
+				nodeParents = new ArrayList<>();
+			}
+
+
+
+
+			for (Node parent : nodeParents) {
+				if (event.get(parent.variable) == null) {
+					System.out.println("-- ERROR ON NODE " + n + ": PARENT " + parent + " NOT IN event ASSIGNMENT LIST");
+					System.out.println("event: " + event);
+				}
+				parentAssignments.set(parent.variable, event.get(parent.variable));
+			}
+
+			Object setVal = n.randomSampleGivenParents(parentAssignments);
+			event.set(n.variable, setVal);
+			//System.out.println("assigning var " + r + " to " + setVal);
+
+
+		}
+		//return x;
+		return event;
 	}
 
     /**
@@ -406,32 +439,84 @@ public class BayesianNetwork {
 		network.add(B);
 		network.add(C);
 		network.connect(A, givens, cpt);
-		network.print(System.out);
+		//network.print(System.out);
 
-
-		Assignment parentAssignment = new Assignment();
-		parentAssignment.set(B, B.domain.get(0));
-		parentAssignment.set(C, C.domain.get(1));
-
-		Assignment a1ass = parentAssignment.copy();
-		a1ass.set(A, A.domain.get(0));
-		Assignment a2ass = parentAssignment.copy();
-		a2ass.set(A, A.domain.get(1));
+		System.out.println("nodes: " + network.nodes);
 
 		Node ANode = network.getNodeForVariable(A);
-		ANode.cpt.set(a1ass, 0.2);
-		ANode.cpt.set(a2ass, 0.8);
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 2; j++) {
+				double a1p = Math.random();
+				for (int k = 0; k < 2; k++) {
+					Assignment a = new Assignment();
+					a.set(B, B.domain.get(i));
+					a.set(C, C.domain.get(j));
+					a.set(A, A.domain.get(k));
 
-		int a1counter = 0;
-		int a2counter = 0;
-
-		for (int i = 0; i < 100; i++) {
-			Object randomAss = ANode.randomSampleGivenParents(parentAssignment);
-			System.out.println(randomAss);
-			if ((String)randomAss == "a1") a1counter++;
-			else a2counter++;
+					ANode.cpt.set(a, Math.random());
+					if (k == 0) ANode.cpt.set(a, a1p);
+					else ANode.cpt.set(a, 1-a1p);
+				}
+			}
 		}
 
-		System.out.println("a1 percentage: " + (double)a1counter / (a1counter+a2counter));
+		Assignment b1ass = new Assignment();
+		b1ass.set(B, B.domain.get(0));
+		Assignment b2ass = new Assignment();
+		b2ass.set(B, B.domain.get(1));
+		network.getNodeForVariable(B).cpt = new CPT(B, new ArrayList<RandomVariable>());
+		double b1assp = Math.random();
+		network.getNodeForVariable(B).cpt.set(b1ass, b1assp);
+		network.getNodeForVariable(B).cpt.set(b2ass, 1-b1assp);
+
+		Assignment c1ass = new Assignment();
+		c1ass.set(C, C.domain.get(0));
+		Assignment c2ass = new Assignment();
+		c2ass.set(C, C.domain.get(1));
+		network.getNodeForVariable(C).cpt = new CPT(C, new ArrayList<RandomVariable>());
+		double c1assp = Math.random();
+		network.getNodeForVariable(C).cpt.set(c1ass, c1assp);
+		network.getNodeForVariable(C).cpt.set(c2ass, 1-c1assp);
+
+		network.print(System.out);
+
+//		try {
+//			TimeUnit.SECONDS.sleep(1);
+//
+//		} catch (InterruptedException e) {
+//
+//		}
+
+		ArrayList<Assignment> a = new ArrayList<>();
+		for (int i = 0; i < 100; i++) {
+			a.add(network.priorSample());
+		}
+		System.out.println(a);
+
+
+//		Assignment parentAssignment = new Assignment();
+//		parentAssignment.set(B, B.domain.get(0));
+//		parentAssignment.set(C, C.domain.get(1));
+//
+//		Assignment a1ass = parentAssignment.copy();
+//		a1ass.set(A, A.domain.get(0));
+//		Assignment a2ass = parentAssignment.copy();
+//		a2ass.set(A, A.domain.get(1));
+//
+//		Node ANode = network.getNodeForVariable(A);
+//		ANode.cpt.set(a1ass, 0.2);
+//		ANode.cpt.set(a2ass, 0.8);
+//
+//		int a1counter = 0;
+//		int a2counter = 0;
+//
+//		for (int i = 0; i < 100; i++) {
+//			Object randomAss = ANode.randomSampleGivenParents(parentAssignment);
+//			System.out.println(randomAss);
+//			if ((String)randomAss == "a1") a1counter++;
+//			else a2counter++;
+//		}
+//
+//		System.out.println("a1 percentage: " + (double)a1counter / (a1counter+a2counter));
     }
 }

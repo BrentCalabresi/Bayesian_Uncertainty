@@ -1,6 +1,8 @@
 package bn.core;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -10,29 +12,33 @@ public class ApproximateInference {
 
     public static void main(String[] args) {
 
+
     }
 
-    public Double rejectionSampling(BayesianNetwork.Node X, Assignment e, BayesianNetwork bn, int samples) {
-        double[] xCounts = new double[samples];
+    public Distribution rejectionSampling(RandomVariable r, Assignment e, BayesianNetwork bn, int samples) {
+        //double[] xCounts = new double[X.getDomain().size()];
+        LinkedHashMap<Object,Integer> rvCounts = new LinkedHashMap<>();
 
         for (int i = 0; i < samples;i++){
-            X = bn.priorSample();
-//            if (X.isConsistent(e)){
-//
-//            }
+            Assignment priorSample = bn.priorSample();
+            if (isConsistent(priorSample, e)) {
+                Object rvSample = priorSample.get(r);
+                rvCounts.put(rvSample, rvCounts.get(rvSample) + 1);
+            }
         }
-        return -1.0;
+        Distribution d = new Distribution(rvCounts);
+        d.normalize();
+        return d;
     }
 
-    private boolean isConsistent(Assignment x,
-			Assignment[] e) {
+    private boolean isConsistent(Assignment x, Assignment e) {
 
-        		for (Assignment ap : e) {
-//            		if (!ap.getValue().equals(x.get(ap.getTermVariable()))) {
-//               				return false;
-//               			}
-            		}
-        		return true;
-        	}
+            for (RandomVariable rv : e.keySet()) {
+//            		
+                if (!e.get(rv).equals(x.get(rv))) return false;
+
+            }
+            return true;
+        }
 
 }
