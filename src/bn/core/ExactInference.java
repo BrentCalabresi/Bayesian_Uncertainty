@@ -2,23 +2,27 @@ package bn.core;
 
 import bn.parser.XMLBIFParser;
 import bn.util.ArraySet;
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.xml.sax.SAXException;
+import bn.core.BayesianNetwork.Node;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author BAC on 3/30/2018.
  */
 public class ExactInference {
-    String file;
-
+    String file = "/Uncertain_Inference/src/bn/examples/";
+    static BayesianNetwork network = null;
     public ExactInference(String file){
-        this.file = file;
+        this.file += file;
+        //System.out.println(file);
     }
 
     public static void main(String[] args) {
-        BayesianNetwork network = null;
+        network = null;
 
         try {
              network = new XMLBIFParser().readNetworkFromFile(args[0]);
@@ -32,58 +36,45 @@ public class ExactInference {
 
         // ---- network is read and stored ----
 
+        ExactInference inference = new ExactInference(args[0]);
+        Distribution d = inference.enumerationAsk(network.getNodeForVariable(network.getVariableByName(args[1])),null,network);
+
+        System.out.println(d);
         System.out.println(network.nodes);
     }
 
-        public Distribution enumerationAsk(ArraySet<RandomVariable> X, RandomVariable observedEvidence, BayesianNetwork bn) {
-            Distribution Q = new Distribution(X.size());
+        public Distribution enumerationAsk(Node X, Assignment observedEvidence, BayesianNetwork bn) {
+            Distribution Q = new Distribution();//X in constructor?
 
-            for (RandomVariable v: X){
-                Q.put(v,enumerateAll(X,observedEvidence));
+            //for each value xi that X can have
+            for (Object v: X.variable.domain){
+                Q.put(v,enumerateAll(bn.getVariableListTopologicallySorted(),observedEvidence));
             }
 
             Q.normalize();
             return Q;
         }
 
-        protected double enumerateAll(ArraySet<RandomVariable> vars, RandomVariable e) {
+
+        protected double enumerateAll(List<RandomVariable> vars, Assignment e) {
 
             if (vars.isEmpty())
                 return 1;
 
             RandomVariable Y = (RandomVariable) vars.toArray()[0];
+            Node nodeY = network.getNodeForVariable(Y);
 
-//            if (){
-//                return 1.0;
-//                }
-            return -1.0;
+            //Y is assigned a value in e
+            if (e.containsValue(Y)){
+                //return P(Y=y | values assigned to Y’s parents in e) × ENUMERATE-ALL(REST(vars), e)
+                return network.getProb(Y,e) * enumerateAll(vars.subList(1,vars.size()),e);
+            }
+            else{
+                return network.getProb(Y,e) * enumerateAll(vars.subList(1,vars.size()),e);
+
             }
 
-//    protected double enumerateAll(ArraySet<RandomVariable> vars, RandomVariable e) {
-//        // if EMPTY?(vars) then return 1.0
-//        if (vars.isEmpty()) {
-//            return 1;
-//        }
-//        // Y <- FIRST(vars)
-//        RandomVariable Y = (RandomVariable) vars.toArray()[0];
-//        // if Y has value y in e
-//        if (e.domain.contains(Y)) {
-//            // then return P(y | parents(Y)) * ENUMERATE-ALL(REST(vars), e)
-//
-//            vars.remove(Y);
-//            return e.posteriorForParents(Y) * enumerateAll(vars, e);
-//        }
-//
-//        double sum = 0;
-//        for (Object y : ((FiniteDomain) Y.getDomain()).getPossibleValues()) {
-//            e.setExtendedValue(Y, y);
-//            sum += e.posteriorForParents(Y) * enumerateAll(Util.rest(vars), e);
-//        }
-//
-//        return sum;
-//    }
-
-
+        }
 }
 
 
