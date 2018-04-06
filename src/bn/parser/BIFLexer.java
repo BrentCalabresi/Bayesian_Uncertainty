@@ -205,7 +205,8 @@ public class BIFLexer implements BIFParser.Lexer {
 		return BIFParser.DECIMAL_LITERAL;
 	    }
 	} else if (!isLetter(ch)) {
-	    error("bad character: " + ch);
+		//System.out.println("letter: "+ch);
+		error("bad character: " + ch);
 	}
 	// Need to read a WORD (possibly a keyword)
 	buf.setLength(0);

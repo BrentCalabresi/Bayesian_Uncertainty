@@ -40,7 +40,7 @@ public class BayesianNetwork {
      * corresponds to a random variable, and has parent nodes, child
      * nodes, and a conditional probability table associated with it.
      */
-    protected class Node implements Printable {
+    public class Node implements Printable {
 
 		public RandomVariable variable;
 		public List<Node> parents;
@@ -196,7 +196,7 @@ public class BayesianNetwork {
     /**
      * The Set of Nodes representing this BayesianNetwork.
      */
-    protected ArraySet<Node> nodes = new ArraySet<>();
+    public ArraySet<Node> nodes = new ArraySet<>();
 
     /**
      * Add a node for the given RandomVariable to this BayesianNetwork.
@@ -228,7 +228,7 @@ public class BayesianNetwork {
      * Return the Node for given RandomVariable from this BayesianNetwork.
      * @throws NoSuchElementException
      */
-    protected Node getNodeForVariable(RandomVariable var) {
+	public Node getNodeForVariable(RandomVariable var) {
 	for (Node node : nodes) {
 	    if (node.variable == var) {
 		return node;

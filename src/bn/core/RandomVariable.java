@@ -40,7 +40,7 @@ public class RandomVariable implements Printable {
 	this.name = name;
     }
 
-    protected Domain domain;
+    public Domain domain;
 
     public Domain getDomain() {
 	return domain;
