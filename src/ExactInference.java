@@ -1,4 +1,4 @@
-package bn.examples;
+
 
 import bn.core.Assignment;
 import bn.core.BayesianNetwork;
@@ -25,6 +25,7 @@ public class ExactInference {
 //        System.out.println(file);
     }
 
+
     public static void main(String[] args) {
         try {
 
@@ -49,8 +50,11 @@ public class ExactInference {
         ExactInference inference = new ExactInference(args[0]);
         Node query = network.getNodeForVariable(network.getVariableByName(args[1]));
         Assignment evidence = new Assignment();
-        evidence.put(network.getVariableByName(args[2]),args[3]);
-        evidence.put(network.getVariableByName(args[4]),args[5]);
+//        System.out.println(network.getVariableListTopologicallySorted());
+        for (int i=2; i< args.length;i+=2){
+//            System.out.println(args[i]+" "+args[i+1]);
+            evidence.put(network.getVariableByName(args[i]),args[i+1]);
+        }
 
 
         System.out.println("You're asking about: "+query.variable+", given: "+evidence);

@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4303c0a0-e191-4cab-b160-0e0eb88f059f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/bn/examples/ApproximateInference.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/ApproximateInference.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/ExactInference.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/bn/core/ApproximateInference.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/bn/core/ExactInference.java" afterPath="$PROJECT_DIR$/src/bn/examples/ExactInference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/BayesianNetwork$Node.class" afterPath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/BayesianNetwork$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/BayesianNetwork.class" afterPath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/BayesianNetwork.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/RandomVariable.class" afterPath="$PROJECT_DIR$/out/production/BayesianInference/bn/core/RandomVariable.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/parser/BIFLexer.class" afterPath="$PROJECT_DIR$/out/production/BayesianInference/bn/parser/BIFLexer.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aima-alarm.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aima-wet-grass.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alarm.bif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/diabetes.bif" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/dog-problem.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/insurance.bif" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/examples/ApproximateInference.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BayesianInference/bn/examples/ExactInference.class" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/bn/examples/ApproximateInference.java" afterPath="$PROJECT_DIR$/src/ApproximateInference.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/bn/examples/ExactInference.java" afterPath="$PROJECT_DIR$/src/ExactInference.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bn/core/BayesianNetwork.java" afterPath="$PROJECT_DIR$/src/bn/core/BayesianNetwork.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bn/core/RandomVariable.java" afterPath="$PROJECT_DIR$/src/bn/core/RandomVariable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bn/parser/BIFLexer.java" afterPath="$PROJECT_DIR$/src/bn/parser/BIFLexer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,10 +25,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="ExactInference.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/bn/examples/ExactInference.java">
+        <entry file="file://$PROJECT_DIR$/src/ExactInference.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="358">
+              <caret line="56" column="9" lean-forward="true" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -39,41 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BIFParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bn/parser/BIFParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="1335" column="17" lean-forward="false" selection-start-line="1335" selection-start-column="17" selection-end-line="1335" selection-end-column="60" />
-              <folding>
-                <element signature="e#8411#8412#0" expanded="true" />
-                <element signature="e#8454#8455#0" expanded="true" />
-                <element signature="e#41356#41357#0" expanded="true" />
-                <element signature="e#41390#41391#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BIFLexer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bn/parser/BIFLexer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="84" column="42" lean-forward="true" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
-              <folding>
-                <element signature="e#748#749#0" expanded="true" />
-                <element signature="e#818#819#0" expanded="true" />
-                <element signature="e#8254#8255#0" expanded="true" />
-                <element signature="e#8318#8319#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ApproximateInference.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/bn/examples/ApproximateInference.java">
+        <entry file="file://$PROJECT_DIR$/src/ApproximateInference.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="47" column="55" lean-forward="true" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+            <state relative-caret-position="396">
+              <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -123,13 +90,16 @@
         <option value="$PROJECT_DIR$/src/bn/util/ArraySet.java" />
         <option value="$PROJECT_DIR$/src/bn/core/Distribution.java" />
         <option value="$PROJECT_DIR$/src/bn/parser/BIFLexer.java" />
-        <option value="$PROJECT_DIR$/src/bn/core/ExactInference.java" />
-        <option value="$PROJECT_DIR$/src/bn/core/ApproximateInference.java" />
         <option value="$PROJECT_DIR$/src/bn/core/BayesianNetwork.java" />
         <option value="$PROJECT_DIR$/src/bn/core/RandomVariable.java" />
         <option value="$PROJECT_DIR$/src/bn/parser/BIFParser.java" />
         <option value="$PROJECT_DIR$/src/bn/examples/ExactInference.java" />
+        <option value="$PROJECT_DIR$/src/bn/core/ApproximateInference.java" />
+        <option value="$PROJECT_DIR$/src/bn/core/ExactInference.java" />
+        <option value="$PROJECT_DIR$/src/test.java" />
         <option value="$PROJECT_DIR$/src/bn/examples/ApproximateInference.java" />
+        <option value="$PROJECT_DIR$/src/ApproximateInference.java" />
+        <option value="$PROJECT_DIR$/src/ExactInference.java" />
       </list>
     </option>
   </component>
@@ -174,34 +144,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="bn" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Uncertain_Inference" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uncertain_Inference" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bn" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Uncertain_Inference" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uncertain_Inference" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bn" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Uncertain_Inference" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uncertain_Inference" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bn" type="462c0819:PsiDirectoryNode" />
-              <item name="parser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Uncertain_Inference" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Uncertain_Inference" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="bn" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -219,6 +161,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -231,15 +178,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ApproximateInference">
+  <component name="RunManager" selected="Application.ExactInference">
     <configuration name="ApproximateInference" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="bn.examples.*" />
+          <option name="PATTERN" value="bn.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="bn.examples.ApproximateInference" />
+      <option name="MAIN_CLASS_NAME" value="bn.core.ApproximateInference" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="10000 alarm.bif CVP PCWP HIGH" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/src/bn/examples" />
@@ -273,7 +220,7 @@
     <configuration name="BayesianNetwork" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
-          <option name="PATTERN" value="bn.examples.*" />
+          <option name="PATTERN" value="bn.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -292,7 +239,7 @@
     <configuration name="CPT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" runner="idea">
         <pattern>
-          <option name="PATTERN" value="bn.examples.*" />
+          <option name="PATTERN" value="bn.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -308,16 +255,11 @@
       <module name="BayesianInference" />
       <envs />
     </configuration>
-    <configuration name="ExactInference" type="Application" factoryName="Application" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="bn.examples.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="bn.examples.ExactInference" />
+    <configuration name="ExactInference" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="ExactInference" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="1000 $PROJECT_DIR$/src/bn/examples/aima-alarm.xml B J true M true" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/src/aima-alarm.xml B J true M true" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -407,19 +349,40 @@
       <properties />
       <listeners />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.ExactInference" />
+    <configuration name="b" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="bn.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="aima-alarm.xml B J true M true" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="BayesianInference" />
+      <envs />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Application.b" />
       <item index="1" class="java.lang.String" itemvalue="Application.CPT" />
       <item index="2" class="java.lang.String" itemvalue="Application.BayesianNetwork" />
       <item index="3" class="java.lang.String" itemvalue="Application.ApproximateInference" />
       <item index="4" class="java.lang.String" itemvalue="Application.BIFParser" />
+      <item index="5" class="java.lang.String" itemvalue="Application.ExactInference" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Application.ApproximateInference" />
-        <item index="1" class="java.lang.String" itemvalue="Application.BIFParser" />
-        <item index="2" class="java.lang.String" itemvalue="Application.BayesianNetwork" />
-        <item index="3" class="java.lang.String" itemvalue="Application.CPT" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Application.ExactInference" />
+        <item index="1" class="java.lang.String" itemvalue="Application.ApproximateInference" />
+        <item index="2" class="java.lang.String" itemvalue="Application.BIFParser" />
+        <item index="3" class="java.lang.String" itemvalue="Application.BayesianNetwork" />
+        <item index="4" class="java.lang.String" itemvalue="Application.CPT" />
       </list>
     </recent_temporary>
   </component>
@@ -457,6 +420,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22592945" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -467,7 +431,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -476,12 +439,12 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/bn/examples/ExactInference.java">
+    <entry file="file://$PROJECT_DIR$/src/ExactInference.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -536,15 +499,15 @@
         <state relative-caret-position="1080">
           <caret line="69" column="34" lean-forward="true" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
           <folding>
-            <element signature="e#1419#1420#0" expanded="true" />
-            <element signature="e#1454#1455#0" expanded="true" />
-            <element signature="e#1569#1570#0" expanded="true" />
-            <element signature="e#1600#1601#0" expanded="true" />
+            <element signature="e#1419#1420#0" expanded="false" />
+            <element signature="e#1454#1455#0" expanded="false" />
+            <element signature="e#1569#1570#0" expanded="false" />
+            <element signature="e#1600#1601#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bn/examples/ApproximateInference.java">
+    <entry file="file://$PROJECT_DIR$/src/ApproximateInference.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
@@ -691,9 +654,9 @@
         <state relative-caret-position="131">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
-            <element signature="e#1454#1455#0" expanded="true" />
-            <element signature="e#1569#1570#0" expanded="true" />
-            <element signature="e#1600#1601#0" expanded="true" />
+            <element signature="e#1454#1455#0" expanded="false" />
+            <element signature="e#1569#1570#0" expanded="false" />
+            <element signature="e#1600#1601#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -719,19 +682,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/bn/parser/BIFLexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="84" column="42" lean-forward="true" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
-          <folding>
-            <element signature="e#748#749#0" expanded="true" />
-            <element signature="e#818#819#0" expanded="true" />
-            <element signature="e#8254#8255#0" expanded="true" />
-            <element signature="e#8318#8319#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -796,20 +746,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bn/examples/ApproximateInference.java">
+    <entry file="file://$PROJECT_DIR$/src/ApproximateInference.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="47" column="55" lean-forward="true" selection-start-line="47" selection-start-column="55" selection-end-line="47" selection-end-column="55" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/bn/parser/BIFLexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="84" column="42" lean-forward="false" selection-start-line="84" selection-start-column="42" selection-end-line="84" selection-end-column="42" />
+          <folding>
+            <element signature="e#748#749#0" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#8254#8255#0" expanded="true" />
+            <element signature="e#8318#8319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="2" lean-forward="false" selection-start-line="0" selection-start-column="2" selection-end-line="0" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/aima-alarm.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/diabetes.bif">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApproximateInference.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="39" lean-forward="false" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/bn/examples/ExactInference.java">
+    <entry file="file://$PROJECT_DIR$/src/ExactInference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="358">
+          <caret line="56" column="9" lean-forward="true" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

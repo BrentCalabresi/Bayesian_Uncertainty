@@ -1,4 +1,3 @@
-package bn.examples;
 
 import bn.core.Assignment;
 import bn.core.BayesianNetwork;
